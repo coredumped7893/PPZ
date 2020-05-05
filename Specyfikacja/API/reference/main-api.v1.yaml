@@ -1,0 +1,1551 @@
+openapi: 3.0.0
+info:
+  title: front api
+  version: '1.0'
+  contact:
+    name: MM
+  description: "¯\\_(ツ)_/¯        -->  YWNjX3Rva2Vu  <--"
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /user:
+    get:
+      summary: Your GET endpoint
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '204':
+          description: No Content
+        '418':
+          description: "I'm a teapot (RFC 2324)"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    default: No content here
+                required:
+                  - status
+              examples:
+                example-1:
+                  value:
+                    status: No content here
+      operationId: get-user
+      description: For logged in Admin only
+      tags:
+        - Private
+      security:
+        - csrf_token: []
+    put:
+      summary: ''
+      operationId: put-user
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      description: Create new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  $ref: '#/components/schemas/User'
+                config:
+                  $ref: '#/components/schemas/UserConfig'
+      tags:
+        - Private
+      security:
+        - csrf_token: []
+    post:
+      summary: ''
+      operationId: post-user
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      description: Edit user data
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  $ref: '#/components/schemas/User'
+      tags:
+        - Private
+      security:
+        - csrf_token: []
+  /forum:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Public
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    default: No content here
+        '418':
+          description: "I'm a teapot (RFC 2324)"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    default: "No content here ¯\\_(ツ)_/¯"
+              examples:
+                ex1:
+                  value:
+                    status: No content here
+      operationId: get-forum
+      description: "¯\\_(ツ)_/¯"
+  /game:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Public
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  games:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Game'
+        '204':
+          description: No Content
+        '418':
+          description: "I'm a teapot (RFC 2324)"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    default: No content here
+                required:
+                  - status
+              examples:
+                example-1:
+                  value:
+                    status: No content here
+      operationId: get-game
+      description: |
+        Get list of all registered games (online)
+        Admin session gets all games from DB
+      parameters:
+        - schema:
+            type: string
+            pattern: '[a-z]'
+            example: online
+            enum:
+              - online
+              - offline
+              - pending
+          in: query
+          name: status
+          description: 'filter by game status [offline,online,pending]'
+          explode: true
+    parameters: []
+  /trade:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Public
+      responses:
+        '204':
+          description: No Content
+        '418':
+          description: "I'm a teapot (RFC 2324)"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    default: No content here
+                required:
+                  - status
+              examples:
+                example-1:
+                  value:
+                    status: No content here
+      operationId: get-trade
+      description: ...
+    post:
+      summary: ''
+      operationId: post-trade
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+      description: Edit existing trade  (logged in only)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                from:
+                  $ref: '#/components/schemas/User'
+                to:
+                  $ref: '#/components/schemas/User'
+                message:
+                  type: string
+                date:
+                  type: string
+                  format: date-time
+                  example: '2019-10-12 07:20:50.52Z'
+                items_given:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Item'
+                items_gained:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Item'
+              required:
+                - from
+                - to
+                - message
+                - date
+                - items_given
+                - items_gained
+      tags:
+        - Private
+      security:
+        - csrf_token: []
+    put:
+      summary: ''
+      operationId: put-trade
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      description: Create new trade (logged in only)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items_gained:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Item'
+                items_given:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Item'
+                date:
+                  type: string
+                  format: date-time
+                  example: '2019-10-12 07:20:50.52Z'
+                message:
+                  type: string
+                to:
+                  $ref: '#/components/schemas/User'
+                from:
+                  $ref: '#/components/schemas/User'
+              required:
+                - from
+                - to
+                - message
+                - date
+                - items_given
+                - items_gained
+      tags:
+        - Private
+      security:
+        - csrf_token: []
+  /forum/categories:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Public
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        display_name:
+                          type: string
+              examples:
+                example-1:
+                  value:
+                    list:
+                      - id: 15525377.362146169
+                        name: mollit
+                        display_name: amet id ea mollit
+                      - id: 8098916.26207082
+                        name: irure minim
+                        display_name: anim do est
+                      - id: 6379188.146290764
+                        name: pariatur id et quis enim
+                        display_name: ut
+                      - id: -13642461.435608804
+                        name: amet do fugiat
+                        display_name: consectetur
+                      - id: -85199106.87640095
+                        name: aliquip
+                        display_name: nostr
+        '204':
+          description: No Content
+        '418':
+          description: "I'm a teapot (RFC 2324)"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    default: No content here
+      operationId: get-forum-categories
+      description: Get all forum categories
+    put:
+      summary: ''
+      operationId: put-forum-categories
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      description: |-
+        Creates new category
+        Only for Logged in users (Forum Admins)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                display_name:
+                  type: string
+      tags:
+        - Private
+      security:
+        - csrf_token: []
+    parameters: []
+  /trade/stats:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Public
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  trades_completed:
+                    type: number
+                  last_trade:
+                    type: number
+                  items_traded:
+                    type: number
+        '204':
+          description: No Content
+      operationId: get-trade-stats
+      description: Get general trading stats
+  '/forum/post/{id}':
+    put:
+      summary: ''
+      operationId: put-forum-post
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                      - Post added
+                      - Rejected
+                      - Error
+        '401':
+          description: Unauthorized
+        '418':
+          description: "I'm a teapot (RFC 2324)"
+      description: Create new post
+      tags:
+        - Private
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForumPost'
+        description: |-
+          set ID to 0 -> server assignes it automatically
+          Action only for Logged in Users(Forum users)
+      security:
+        - csrf_token: []
+    post:
+      summary: ''
+      operationId: post-forum-post
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      description: Edit existing post or return existing from given id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForumPost'
+      tags:
+        - Private
+      security:
+        - csrf_token: []
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: ''
+      operationId: get-forum-post-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/ForumPost'
+              examples: {}
+      tags:
+        - Public
+      description: 'get specific post from id '
+    delete:
+      summary: ''
+      operationId: delete-forum-post-id
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      description: |-
+        Deletes post with ID
+          Default user can delete only own posts
+          Forum Moderator & Admin can delete everything
+      tags:
+        - Private
+      security:
+        - csrf_token: []
+  '/forum/post/user/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Public
+        - Private
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ForumPost'
+              examples:
+                example-1:
+                  value:
+                    data:
+                      - owner:
+                          username: aliqua laboris
+                          email: LiOHJcA4JEPqhqG@ShnZ.pfcu
+                          registration_time: '1991-04-12T20:28:18.424Z'
+                          last_succ_login: '1998-04-29T06:34:15.146Z'
+                          last_err_login: '1957-05-05T00:22:54.783Z'
+                          activated: true
+                          user_role: occaecat in nulla do
+                        id: -63706692.017401114
+                        '': anim
+                      - owner:
+                          username: fugiat cupidatat irure in voluptate
+                          email: 2OocB@dA.pjl
+                          registration_time: '1974-10-11T22:22:26.029Z'
+                          last_succ_login: '1963-10-22T06:17:05.192Z'
+                          last_err_login: '1960-09-16T16:47:18.097Z'
+                          activated: true
+                          user_role: Lorem aliqua
+                        id: -98875020.60646299
+                        '': dolore veniam aliqua
+                      - owner:
+                          username: Excepteur ali
+                          email: a7i@GcfP.ubxa
+                          registration_time: '1976-10-25T02:16:53.761Z'
+                          last_succ_login: '1990-06-10T17:04:58.276Z'
+                          last_err_login: '1956-06-25T14:52:08.94Z'
+                          activated: true
+                          user_role: in eiusmo
+                        id: 94492383.47123012
+                        '': cupidatat
+        '401':
+          description: Unauthorized
+      operationId: get-forum-post-user-id
+      description: Gets all posts from given user
+  /forum/threads:
+    get:
+      summary: Your GET endpoint
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ForumThread'
+                required:
+                  - data
+        '204':
+          description: No Content
+      operationId: get-forum-threads
+      description: Gets all threads
+      tags:
+        - Public
+    put:
+      summary: ''
+      operationId: put-forum-threads
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      tags:
+        - Private
+      description: |-
+        Create new forum thread
+        (logged in only)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForumThread'
+  '/game/{name}':
+    parameters:
+      - schema:
+          type: string
+        name: name
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Public
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '204':
+          description: No Content
+      operationId: get-game-name
+      description: Get game info from its name
+  /system:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Private
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  theme:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      display_name:
+                        type: string
+                      config:
+                        type: object
+                        description: 'JSON encoded object from DB, each theme can have different structure'
+                    required:
+                      - id
+                      - display_name
+                      - config
+                  options:
+                    type: object
+                    properties:
+                      maintenance_mode:
+                        type: boolean
+                        default: 'false'
+                        enum:
+                          - 'true'
+                          - 'false'
+                      locale:
+                        $ref: '#/components/schemas/Locale'
+                      admin_mail:
+                        type: string
+                        format: email
+                      ado_mail:
+                        type: string
+                        format: email
+                    required:
+                      - maintenance_mode
+                      - locale
+                  users_online:
+                    type: number
+                  users_aregistered:
+                    type: number
+              examples:
+                example-1:
+                  value:
+                    theme:
+                      id: 79519461.66112363
+                      display_name: Ut consequat in pariatur ut
+                      config: {}
+                    options:
+                      maintenance_mode: true
+                      locale:
+                        id: -19432397.510536686
+                        code: co
+                        name: voluptate consect
+                      admin_mail: Jayb8HaPC@VJHlMmEnEaaFPfhvVpSktWECAluFbJQ.pw
+                      ado_mail: Gf4vSXbkXnWT@oTvsaKeLuOEqlRQmoRkfroGfx.och
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+      operationId: get-system
+      security:
+        - csrf_token: []
+      description: |
+        get system config & data
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - all
+              - theme
+            default: all
+            example: all
+          in: query
+          name: scope
+          description: selecting specific data part
+  /trade/list:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Private
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    from:
+                      $ref: '#/components/schemas/User'
+                    to:
+                      $ref: '#/components/schemas/User'
+                    date:
+                      type: string
+                      format: date-time
+                      example: '2019-10-12 07:20:50.52Z'
+                    items_given:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Item'
+                    items_gained:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Item'
+                  required:
+                    - from
+                    - to
+                    - date
+                    - items_given
+                    - items_gained
+        '401':
+          description: Unauthorized
+      operationId: get-trade-list
+      description: Gets trade list for current user (logged in)
+      security:
+        - csrf_token: []
+  /user/config:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Private
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserConfig'
+        '401':
+          description: Unauthorized
+      operationId: get-user-config
+      description: 'get config for currently logged in user '
+      security:
+        - csrf_token: []
+    post:
+      summary: ''
+      operationId: post-user-config
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      description: edit user config
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  $ref: '#/components/schemas/User'
+                config:
+                  $ref: '#/components/schemas/UserConfig'
+      tags:
+        - Private
+      security:
+        - csrf_token: []
+  '/user/item/{username}':
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Private
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  inventory:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Item'
+                  trades:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        date:
+                          type: string
+                        form:
+                          type: string
+                        to:
+                          type: string
+                        items_sent:
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/Item'
+                        items_gained:
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/Item'
+                        finished:
+                          type: string
+                        status:
+                          type: string
+        '401':
+          description: Unauthorized
+      operationId: get-user-item
+      description: Gets data about users items and trades
+      security:
+        - csrf_token: []
+    parameters:
+      - schema:
+          type: string
+        name: username
+        in: path
+        required: true
+  '/user/friend/{user}':
+    parameters:
+      - schema:
+          type: string
+        name: user
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Private
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  is_frend:
+                    type: boolean
+                    default: 'true'
+                    enum:
+                      - 'true'
+                      - 'false'
+                  invitation_created:
+                    type: string
+                    format: date-time
+                  invited:
+                    $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+      operationId: get-user-friend-user
+      description: Check friend status with given user
+      security:
+        - csrf_token: []
+    put:
+      summary: ''
+      operationId: put-user-friend-user
+      responses:
+        '200':
+          description: OK
+      tags:
+        - Private
+      security:
+        - csrf_token: []
+      description: Send friend request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+              required:
+                - username
+    delete:
+      summary: ''
+      operationId: delete-user-friend-user
+      responses:
+        '200':
+          description: OK
+      description: Delete friend request or remove from friend list
+      security:
+        - csrf_token: []
+      tags:
+        - Private
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+              required:
+                - username
+        description: ''
+  /user/login:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Private
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  login_date:
+                    type: string
+                    format: date-time
+                    example: '2019-10-12 07:20:50.52Z'
+                  ip:
+                    type: string
+                required:
+                  - token
+                  - login_date
+                  - ip
+        '401':
+          description: Unauthorized
+      operationId: get-user-login
+      description: 'Gets login info '
+      security:
+        - csrf_token: []
+    post:
+      summary: ''
+      operationId: post-user-login
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      description: Send login data and try to authorize
+      tags:
+        - Private
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  oneOf:
+                    - properties:
+                        login:
+                          type: string
+                        email:
+                          type: string
+                          format: email
+                  type: object
+                password:
+                  type: string
+              required:
+                - user
+                - password
+      security:
+        - csrf_token: []
+    delete:
+      summary: ''
+      operationId: delete-user-login
+      responses:
+        '200':
+          description: OK
+      description: Logout user
+      security:
+        - csrf_token: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                lo:
+                  type: number
+                  default: 1
+                  enum:
+                    - 1
+                    - 0
+                  example: 1
+      tags:
+        - Private
+  /user/chat:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Private
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    last_message:
+                      type: string
+                      format: date-time
+                    with_user:
+                      $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+      operationId: get-user-chat
+      description: get conversation list
+      security:
+        - csrf_token: []
+    post:
+      summary: ''
+      operationId: post-user-chat
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      description: 'Send message to user '
+      tags:
+        - Private
+      security:
+        - csrf_token: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    parameters: []
+  /user/payments:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Private
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Invoice'
+        '401':
+          description: Unauthorized
+      operationId: get-user-payments
+      security:
+        - csrf_token: []
+      description: Get user payment history (List of invoices)
+  '/game/stats/{gameid}':
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Public
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  game:
+                    $ref: '#/components/schemas/Game'
+                  game_stats:
+                    type: string
+                  user_stats:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        user:
+                          $ref: '#/components/schemas/User'
+                        data:
+                          type: string
+        '204':
+          description: No Content
+      operationId: get-game-stats
+      description: Get game and user stats
+    parameters:
+      - schema:
+          type: string
+        name: gameid
+        in: path
+        required: true
+  '/game/data/{gameid}':
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Private
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  game:
+                    $ref: '#/components/schemas/Game'
+                  data:
+                    type: string
+                required:
+                  - game
+                  - data
+      operationId: get-game-data
+      description: Get game data
+      security:
+        - csrf_token: []
+    put:
+      summary: ''
+      operationId: put-game-data
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      description: 'Save data to DB, accessible for games only'
+      tags:
+        - Private
+      security:
+        - csrf_token: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                gamename:
+                  type: string
+                game_token:
+                  type: string
+                data:
+                  type: string
+              required:
+                - gamename
+                - game_token
+                - data
+    parameters:
+      - schema:
+          type: string
+        name: gameid
+        in: path
+        required: true
+  '/user/message/{target}/{type}':
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Private
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  owner:
+                    $ref: '#/components/schemas/User'
+                  list:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Message'
+        '401':
+          description: Unauthorized
+      operationId: get-user-message
+      description: |
+        Get message list
+      security:
+        - csrf_token: []
+      parameters:
+        - schema:
+            type: integer
+            default: 0
+            example: 15
+          in: query
+          name: limit
+          description: 0 = no limit
+    post:
+      summary: ''
+      operationId: post-user-message
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      description: "Send message to given user or game room \\\n{target} -> username or game room id \n{type} -> selector for user or game room (0 = user; 1 = game room)"
+      security:
+        - csrf_token: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                owner:
+                  $ref: '#/components/schemas/User'
+                to:
+                  $ref: '#/components/schemas/User'
+                message:
+                  type: string
+              required:
+                - owner
+                - to
+                - message
+      tags:
+        - Private
+    parameters:
+      - schema:
+          type: string
+        name: target
+        in: path
+        required: true
+      - schema:
+          type: integer
+          default: 0
+          enum:
+            - 0
+            - 1
+          example: 0
+        name: type
+        in: path
+        required: true
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: Gets all user data
+      x-tags:
+        - Private
+      properties:
+        username:
+          type: string
+          minLength: 1
+        email:
+          type: string
+          format: email
+          example: example@domain.pl
+        registration_time:
+          type: string
+          format: date-time
+          example: '2019-10-12 07:20:50.52Z'
+        last_succ_login:
+          type: string
+          format: date-time
+          example: '2019-10-12 07:20:50.52Z'
+        last_err_login:
+          type: string
+          format: date-time
+          example: '2019-10-12 07:20:50.52Z'
+        activated:
+          type: boolean
+          default: 'true'
+          enum:
+            - 'true'
+            - 'false'
+        user_role:
+          type: string
+          example: default_user
+      required:
+        - username
+        - email
+        - registration_time
+        - last_succ_login
+        - last_err_login
+        - activated
+        - user_role
+    Game:
+      title: Game
+      type: object
+      x-tags:
+        - Private
+      properties:
+        name:
+          type: string
+        owner:
+          $ref: '#/components/schemas/User'
+        diaply_name:
+          type: string
+          minLength: 1
+        description:
+          type: string
+          minLength: 0
+        icon:
+          type: string
+        status:
+          type: string
+          enum:
+            - online
+            - offline
+            - pending
+          minLength: 1
+        created:
+          type: string
+          format: date-time
+          example: '2019-10-12 07:20:50.52Z'
+          minLength: 1
+      required:
+        - name
+        - owner
+        - diaply_name
+        - description
+        - icon
+        - status
+        - created
+    UserConfig:
+      title: UserConfig
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        max_login_attempts:
+          type: string
+          default: '5'
+          example: '5'
+          minLength: 1
+        map_api_calls_p_hour:
+          type: string
+          default: '1000'
+          example: '1000'
+          minLength: 1
+        locale:
+          $ref: '#/components/schemas/Locale'
+        login_locked:
+          type: string
+          default: 'false'
+          enum:
+            - 'true'
+            - 'false'
+          example: 'true'
+        last_api_call:
+          type: string
+          format: date-time
+          example: '2019-10-12 07:20:50.52Z'
+        last_game_played:
+          type: string
+          format: date-time
+          example: '2019-10-12 07:20:50.52Z'
+      required:
+        - user
+        - max_login_attempts
+        - map_api_calls_p_hour
+        - locale
+        - login_locked
+        - last_api_call
+        - last_game_played
+    UserFriends:
+      title: UserFriends
+      type: object
+      properties:
+        id:
+          type: number
+        user_inviting:
+          $ref: '#/components/schemas/User'
+        user_invited:
+          $ref: '#/components/schemas/User'
+        created:
+          type: string
+          format: date-time
+          example: '2019-10-12 07:20:50.52Z'
+      required:
+        - id
+        - user_inviting
+        - user_invited
+        - created
+    Locale:
+      title: Locale
+      type: object
+      properties:
+        id:
+          type: number
+        code:
+          type: string
+          minLength: 1
+          maxLength: 3
+        name:
+          type: string
+      required:
+        - id
+        - code
+    ForumThread:
+      title: ForumThread
+      type: object
+      properties:
+        id:
+          type: number
+        owner:
+          type: string
+        category_id:
+          type: number
+        name:
+          type: string
+        display_name:
+          type: string
+        created:
+          type: string
+          format: date-time
+          example: '2019-10-12 07:20:50.52Z'
+        last_activity:
+          type: string
+          deprecated: true
+          format: date-time
+          example: '2019-10-12 07:20:50.52Z'
+        enabled:
+          type: boolean
+          default: 'true'
+          enum:
+            - 'true'
+            - 'false'
+        pinned:
+          type: boolean
+          default: 'true'
+          enum:
+            - 'true'
+            - 'false'
+      required:
+        - id
+        - owner
+        - category_id
+        - name
+        - display_name
+        - created
+        - last_activity
+        - enabled
+        - pinned
+    ForumPost:
+      title: ForumPost
+      type: object
+      properties:
+        id:
+          type: number
+        owner:
+          $ref: '#/components/schemas/User'
+        thread_id:
+          $ref: '#/components/schemas/ForumThread'
+        created:
+          type: string
+          format: date-time
+          example: '2019-10-12 07:20:50.52Z'
+        content:
+          type: string
+        edited:
+          type: boolean
+          enum:
+            - 'true'
+            - 'false'
+      required:
+        - id
+        - owner
+        - thread_id
+        - created
+        - content
+        - edited
+    Item:
+      title: Item
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        description:
+          type: string
+        skin_id:
+          type: number
+        created:
+          type: string
+          format: date-time
+          example: '2019-10-12 07:20:50.52Z'
+        tradable:
+          type: boolean
+          default: 'true'
+          enum:
+            - 'true'
+            - 'false'
+        marketable:
+          type: boolean
+          default: 'true'
+          enum:
+            - 'true'
+            - 'false'
+        skin_type:
+          type: string
+    Invoice:
+      title: Invoice
+      type: object
+      properties:
+        id:
+          type: integer
+        user:
+          $ref: '#/components/schemas/User'
+        price:
+          type: number
+        created:
+          type: string
+          format: date-time
+        document:
+          type: string
+      required:
+        - id
+        - user
+    Message:
+      title: Message
+      type: object
+      properties:
+        id:
+          type: string
+        from:
+          $ref: '#/components/schemas/User'
+        to:
+          $ref: '#/components/schemas/User'
+        date:
+          type: string
+          format: date-time
+        message:
+          type: string
+      required:
+        - id
+        - from
+        - to
+        - date
+        - message
+      description: Message body
+  securitySchemes:
+    csrf_token:
+      type: http
+      scheme: bearer
+      description: serves as csrf token
