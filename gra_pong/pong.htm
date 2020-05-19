@@ -66,8 +66,8 @@
 </head>
 <body>
 
-  <div style="text-align:center" >
-    <canvas id="canvas" width="960" height="640">wtf?!</canvas>
+  <div style="text-align:center">    
+    <canvas id="canvas1" width="960" height="540">wtf?!</canvas>
   </div>
   
 
@@ -146,7 +146,7 @@ function playerMove(e) {
   if (start) {
     var y = e.pageY;
     if (player.height / 2 + 10 < y && y < game.height - player.height / 2 - 10) {
-      player.y = y - player.height / 2;
+      player.y = y - player.height / 2; //player.y = y - player.height / 2;
     }
   }
 }
@@ -279,7 +279,7 @@ function play() {
 function init() {
   start = false;
   
-  game = new rect("green", 0, 0, 960, 640); 
+  game = new rect("green", 0, 0, 960, 540); 
   game.total = 0;
   game.win = 0;
   game.lose = 0;
@@ -294,11 +294,11 @@ function init() {
   
   ball.vX = 0; 
   ball.vY = 0; 
-  var canvas = document.getElementById("canvas");
+  var canvas = document.getElementById("canvas1");
   canvas.width = game.width;
   canvas.height = game.height;
   context = canvas.getContext("2d");
-  canvas.onmousemove = playerMove;
+  onmousemove = playerMove; //canvas.onmousemove = playerMove;
   canvas.onclick = startGame;
   setInterval(play, 1000 / 50);
 }
