@@ -4,6 +4,9 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+
+
+
 (function($) {
 
 	var	$window = $(window),
@@ -62,5 +65,19 @@
 					target: $body,
 					visibleClass: 'navPanel-visible'
 				});
+
+			function valForm(e){
+				if($("#register-pass").val() === $("#register-pass2").val() ){
+				}else{
+					$("#register-form p").fadeIn(500);
+					e.preventDefault();
+				}
+			}
+
+
+			$("#register-form").on("submit",function function_name(e) {
+				valForm(e);
+			});
+
 
 })(jQuery);
