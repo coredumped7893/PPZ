@@ -26,15 +26,28 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = [];
+	protected $helpers = ['dump'];
 
-	/**
+    /**
+     * @var \CodeIgniter\Session\Session
+     */
+    protected $session;
+    protected $templateConfig;
+    protected $data=array();
+
+    /**
 	 * Constructor.
 	 */
 	public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
 	{
 		// Do Not Edit This Line
-		parent::initController($request, $response, $logger);
+        parent::initController($request, $response, $logger);
+        $this->session = \Config\Services::session();
+        //obj_dump($this->session->get());
+        //$this->session->start();
+        $this->session->set(["v1"=>"v1"]);
+        $this->templateConfig = config('Template');
+        $this->data['loginStatus'] = User::isLoggedIn(false);
 
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
