@@ -1,7 +1,9 @@
 <?php namespace App\Controllers;
 
 use App\Libraries\Api;
+use App\Models\UserModel;
 use CodeIgniter\Controller;
+use CodeIgniter\Session\Session;
 
 
 /**
@@ -11,16 +13,38 @@ use CodeIgniter\Controller;
  */
 class User extends BaseController{
 
+    private $userModel;
 
     /**
+     * User constructor.
+     * Makes UserModel avail in class
+     *
+     * @internal
+     * @see UserModel
+     */
+    public function __construct() {
+        $this->userModel = model('UserModel');
+    }
+
+
+    /**
+     * If logged in, shows user dashboard
+     *
      * @internal
      * @return void
+     * @internal
      */
     public function index(){
         //@TODO id logged in redirect to dashboard
 
     }
 
+    /**
+     *  Settings view
+     */
+    public function settings(){
+        echo "Settings";
+    }
 
     /**
      * @param string $username Username unique name/login
@@ -28,7 +52,7 @@ class User extends BaseController{
      * @api
      */
     public function items($username){
-        //@TODO get items from DB; check for permissions
+        //@TODO get items from DB; check for permissions; must be logged in
     }
 
     /**
@@ -43,6 +67,31 @@ class User extends BaseController{
         //@TODO get your friends list
     }
 
+    /**
+     * Display user login form, and catch data after submit
+     * @internal
+     *
+     */
+    public function login(){
+        if($this->data['loginStatus']) return redirect()->to('/user');// If logged in, redirect to profile
+        return view('login');
+    }
+
+    /**
+     * Register view
+     * @internal
+     */
+    public function register(){
+        return view('register');
+    }
+
+    /**
+     * Get data from register form and save it to database
+     * @internal
+     */
+    public function saveuser(){
+
+    }
 
     /**
      * GET: gets login info
@@ -50,22 +99,53 @@ class User extends BaseController{
      * DELETE: logout
      *
      * @return void
+     * @see \App\Controllers\BaseController::$session
+     * @see \redirect
+     * @see \App\Models\UserModel::auth
      * @api
      */
-    public function login(){
-        //@TODO auth user
-        //echo $this->request->getMethod();
+    public function auth(){
+        $postData = $this->request->getPost();
+        $this->session->set('login_status','');
+        $this->session->markAsFlashdata('login_status');
+        if($this->request->getMethod(true) == "POST"){
+            if(!empty($postData)){
+                $status = $this->userModel->auth(array("login"=>$postData['login'],"pass"=>$postData['pass']));
+                if($status['status']){
+                    //Set session values
+                    $this->session->set('username',esc($postData['login']));
+                    $this->session->set('role',$status['role']);
+                    echo $status['message'];
+                    return redirect()->to('/user');//User`s dashboard/profile
+                }else{
+                    $this->session->set('login_status',$status['message']);
+                    echo $status['message'];
+                    return redirect()->back();
+                }
+            }else{
+                //	¯\_(ツ)_/¯
+                //Form cannot be empty
+                $this->session->set('login_status','Form cannot be empty');
+                obj_dump("Empty form");
+                return redirect()->back();
+            }
+        }else if($this->request->getMethod(true) == "DELETE"){
+            self::logOut();
+        }else if($this->request->getMethod(true) == "GET"){
+            self::isLoggedIn(true);
+        }
     }
-
 
     /**
      * @internal
-     * @return void
      */
-    public function dashboard(){
-        //@TODO Display and provide forms to edit user data.
-        return null;
+    public static function logOut(){
+        $ses = session();
+        $ses->destroy();
+        return redirect()->to("/");
+        Api::response(200);
     }
+
 
     /**
      * @api
@@ -73,6 +153,26 @@ class User extends BaseController{
      */
     public function config(){
         return Api::response(204);
+    }
+
+
+    /**
+     * Checks if user is logged in
+     *
+     * @return bool
+     * @api
+     */
+    public static function isLoggedIn(bool $message) : bool {
+        $ses = session();
+        if($ses->has('username') && $ses->get('username') != ''){
+            //obj_dump(true);
+            if($message) echo Api::response('200_custom',"true");
+            return true;
+        }else{
+            //obj_dump(false);
+            if($message) echo Api::response('200_custom',"false");
+            return false;
+        }
     }
 
 

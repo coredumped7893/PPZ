@@ -7,5 +7,6 @@ class GameModel extends \CodeIgniter\Model {
     protected $table      = 'game';
     protected $primaryKey = 'name';
     protected $returnType     = 'array';
+    protected $allowedFields = ['data'];
 
 }

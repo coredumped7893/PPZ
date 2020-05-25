@@ -913,7 +913,7 @@ paths:
               required:
                 - username
         description: ''
-  /user/login:
+  /user/auth:
     get:
       summary: Your GET endpoint
       tags:
@@ -1001,6 +1001,7 @@ paths:
                   example: 1
       tags:
         - Private
+    parameters: []
   /user/chat:
     get:
       summary: Your GET endpoint
@@ -1103,7 +1104,7 @@ paths:
         name: gameid
         in: path
         required: true
-  '/game/data/{gameid}':
+  '/game/data/{gamename}':
     get:
       summary: Your GET endpoint
       tags:
@@ -1120,13 +1121,33 @@ paths:
                     $ref: '#/components/schemas/Game'
                   data:
                     type: string
+                  message:
+                    type: string
+                    default: OK
+                    example: OK
                 required:
                   - game
                   - data
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    default: Game not found
       operationId: get-game-data
       description: Get game data
       security:
         - csrf_token: []
+      parameters:
+        - schema:
+            type: string
+            default: 6eabe2576b5e466e7714446778f2d128
+          in: query
+          name: token
     put:
       summary: ''
       operationId: put-game-data
@@ -1159,7 +1180,7 @@ paths:
     parameters:
       - schema:
           type: string
-        name: gameid
+        name: gamename
         in: path
         required: true
   '/user/message/{target}/{type}':
@@ -1204,7 +1225,7 @@ paths:
           description: OK
         '401':
           description: Unauthorized
-      description: "Send message to given user or game room \\\n{target} -> username or game room id \n{type} -> selector for user or game room (0 = user; 1 = game room)"
+      description: "Send message to given user or game room \\\n{target} -> username or game room id \n{type} -> selector for user or game room (0 = user; 1 = game room)\ncurrent chat room stored in session"
       security:
         - csrf_token: []
       requestBody:
