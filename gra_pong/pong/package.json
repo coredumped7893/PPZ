@@ -1,0 +1,33 @@
+{
+  "name": "online_ping_pong",
+  "version": "1.0.0",
+  "description": "fun online ping pong",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imtaekh/online_ping_pong.git"
+  },
+  "keywords": [
+    "node",
+    "game",
+    "online"
+  ],
+  "author": "imtaek hong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imtaekh/online_ping_pong/issues"
+  },
+  "homepage": "https://github.com/imtaekh/online_ping_pong#readme",
+  "dependencies": {
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "node.js": "0.0.1-security",
+    "nodemon": "^2.0.4",
+    "path": "^0.12.7",
+    "socket.io": "^1.7.4"
+  }
+}
