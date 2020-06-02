@@ -17,6 +17,7 @@ class Api {
         "401" => "{\"message\": \"Unauthorized\",\"date\": \"%s\"}",
         "status_ok" => "{\"status\": \"Online\",\"date\": \"%s\"}",
         "status_offline" => "{\"status\": \"Offline\",\"date\": \"%s\"}",
+        "200_custom" => "{\"message\": \"%s\",\"date\": \"%s\"}",
     );
 
     /**
@@ -40,10 +41,14 @@ class Api {
      * @param int $responseName http code or name
      * @internal
      */
-    public static function response($responseName = 200){
+    public static function response($responseName = 200,$msg=''){
         if(array_key_exists($responseName,self::$responsesArr)){
             helper("isodate");
-            return sprintf(self::$responsesArr[$responseName],iso_datetime());
+            if(strpos($responseName, '_custom') === false){
+                return sprintf(self::$responsesArr[$responseName],iso_datetime());
+            }else{
+                return sprintf(self::$responsesArr[$responseName],$msg,iso_datetime());
+            }
         }else{
             throw new Exception("Response not found");
         }

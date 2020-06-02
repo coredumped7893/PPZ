@@ -1,0 +1,27 @@
+{
+  "name": "nodejs-socket",
+  "version": "1.0.0",
+  "description": "pong chat",
+  "main": "app.js",
+  "scripts": {
+    "pongchat": "nodemon app.js"
+  },
+  "author": "dmytro rogozhkin",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.7.4",
+    "express": "^4.17.1",
+    "node.js": "0.0.1-security",
+    "nodemon": "^1.19.4",
+    "socket.io": "^2.3.0"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "bugs": {
+    "url": "https://"
+  },
+  "homepage": "http:// ",
+  "devDependencies": {}
+}
