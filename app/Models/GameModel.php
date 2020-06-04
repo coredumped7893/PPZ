@@ -1,6 +1,10 @@
 <?php namespace App\Models;
 
 
+/**
+ * Class GameModel
+ * @package App\Models
+ */
 class GameModel extends \CodeIgniter\Model {
 
     //CRUD config

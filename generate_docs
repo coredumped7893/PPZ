@@ -1,1 +1,2 @@
-phpdoc -d ./app/ -t ./docs/api --template="responsive-twig"
+phpdoc -d ./app/ -t ./autogen_DOCS --template="responsive-twig"
+php phpDocumentor.phar -d ./app/ -t ./autogen_DOCS --template="responsive-twig" -c ./phpdoc.dist.xml
