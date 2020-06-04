@@ -4,6 +4,10 @@
 namespace App\Controllers;
 
 
+/**
+ * Class Trade
+ * @package App\Controllers
+ */
 class Trade extends BaseController {
 
     /**

@@ -8,6 +8,10 @@ use App\Controllers\User;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
+/**
+ * Przepuszcza tylko zalogowanego użytkownika
+ * @package App\Filters
+ */
 class AuthFilter implements \CodeIgniter\Filters\FilterInterface {
 
     /**

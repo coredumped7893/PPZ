@@ -1,6 +1,10 @@
 <?php namespace App\Libraries;
 
-
+/**
+ * Class Auth
+ * @package App\Libraries
+ * @deprecated
+ */
 class Auth {
 
 

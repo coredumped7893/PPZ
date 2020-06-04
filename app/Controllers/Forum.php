@@ -3,7 +3,11 @@
 
 namespace App\Controllers;
 
-
+/**
+ * Class Forum
+ * @package App\Controllers
+ * @deprecated
+ */
 class Forum extends BaseController {
 
 

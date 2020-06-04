@@ -2,6 +2,7 @@
 use Exception;
 
 /**
+ * Generowanie odpowiedzi w JSON
  * @author Maciek Malik
  * @package App/Libraries
  */

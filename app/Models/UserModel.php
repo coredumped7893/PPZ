@@ -4,6 +4,10 @@
 use CodeIgniter\Database\BaseBuilder;
 use Config\Database;
 
+/**
+ * Class UserModel
+ * @package App\Models
+ */
 class UserModel extends \CodeIgniter\Model {
 
     //CRUD config
