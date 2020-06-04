@@ -35,7 +35,7 @@ $cfg = (config('Template'));
 <div id="page-wrapper">
 
     <!-- Header -->
-    <section id="header" class="wrapper">
+    <section id="header" class="wrapper" style="height: 20em;">
 
         <!-- Logo -->
         <div id="logo">
@@ -54,7 +54,7 @@ $cfg = (config('Template'));
                         <a href="/user"><i class="fas fa-child"></i> <b>'.session("username").'</b></a> <!-- Pobieramy z bazy danych nazwę użytkownika i ją tu wyświetlamy -->
                         <ul>
                             <li><a href="/user">PROFIL</a></li>
-                           <!-- <li><a href="/user/inventory">EKWIPUNEK</a> -->
+                             <!-- <li><a href="/user/inventory">EKWIPUNEK</a> -->
                             <li><a href="#">ZNAJOMI</a></li>
                             <li><a href="#">HISTORIA PŁATNOŚCI</a></li>
                             <li><a href="/user/settings">USTAWIENIA KONTA</a></li>
@@ -84,14 +84,14 @@ $cfg = (config('Template'));
                 </li>
 
 
-                <li>
-                    <a href="#"><i class="far fa-address-card"></i>  O NAS</a>
-                    <ul>
-                        <li><a href="/contact">KONTAKT</a></li>
-                        <li><a href="/faq">FAQ</a>
-                    </ul>
-
-                </li>
+<!--                <li>-->
+<!--                    <a href="#"><i class="far fa-address-card"></i>  O NAS</a>-->
+<!--                    <ul>-->
+<!--                        <li><a href="/contact">KONTAKT</a></li>-->
+<!--                        <li><a href="/faq">FAQ</a>-->
+<!--                    </ul>-->
+<!---->
+<!--                </li>-->
                 <?php
 
                 if($loginStatus){
