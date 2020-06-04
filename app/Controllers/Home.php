@@ -25,9 +25,28 @@ class Home extends BaseController {
      */
     public function index() {
         $this->data['games'] = $this->gameModel->where('status','online')->findAll();//Lista aktywnych gier
+        if(!empty($this->data['games'])){
+            foreach ($this->data['games'] as $g){
+                $this->data['data'][$g['name']] = $this->gameModel->getPlayerStats($g['name']);
+            }
+        }
+
+        $this->data['includeCSS'] = ['owl.carousel','owl.theme.default'];
+        $this->data['includeJS'] = ['owl.carousel.min'];
+
+        //Pobranie dostępnych do sprzedaży skinów
+        $tradeModel = model('TradeModel');
+        $this->data['skins'] = $tradeModel->getskinList();
+
 		return view('home',$this->data);
 	}
 
+    /**
+     * Contact us form/data
+     */
+    public function contact(){
+        return view('contact',$this->data);
+    }
 
 
 }

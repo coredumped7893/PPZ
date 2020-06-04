@@ -27,6 +27,19 @@ class User extends BaseController{
     }
 
 
+    private function get_gravatar( $email, $s = 100, $d = 'identicon', $r = 'g', $img = false, $atts = array() ) {
+        $url = 'https://www.gravatar.com/avatar/';
+        $url .= md5( strtolower( trim( $email ) ) );
+        $url .= "?s=$s&d=$d&r=$r";
+        if ( $img ) {
+            $url = '<img src="' . $url . '"';
+            foreach ( $atts as $key => $val )
+                $url .= ' ' . $key . '="' . $val . '"';
+            $url .= ' />';
+        }
+        return $url;
+    }
+
     /**
      * If logged in, shows user dashboard
      *
@@ -35,8 +48,15 @@ class User extends BaseController{
      * @internal
      */
     public function index(){
-        //@TODO id logged in redirect to dashboard
+        //Get gravatar
+        $this->data['gravatar'] = $this->get_gravatar(session('username'));
+        $this->data['stats'] = $this->userModel->getUserStats(session('username'));
+        $this->data['includeCSS'] = ['owl.carousel','owl.theme.default'];
+        $this->data['includeJS'] = ['owl.carousel.min'];
 
+        $tradeModel = model('TradeModel');
+        $this->data['skins'] = $tradeModel->getUserSkins();
+        return view('dashboard',$this->data);
     }
 
     /**

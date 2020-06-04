@@ -35,18 +35,22 @@ class Game extends BaseController {
 
 
     /**
-     * Widok gry
+     * Widok gier
      *
      * @param $gameName
      */
     public function play($gameName=''){
-        obj_dump($gameName);
         if($gameName == ''){
             //Nazwa gry jest wymagana
             return redirect()->to('/');
         }
+        return view('game/play/_'.$gameName.'_',$this->data);
     }
 
+    /**
+     * Lista obecnie aktywnych gier (/games)
+     * @return string
+     */
     public function gameList(){
         $this->gameModel = model('GameModel');
         $this->data['games'] = $this->gameModel->where('status','online')->findAll();//Lista aktywnych gier
@@ -57,6 +61,12 @@ class Game extends BaseController {
      * Rankingi top graczy
      */
     public function top(){
+        $games = $this->model->where('status','online')->findAll();
+        if(!empty($games)){
+            foreach ($games as $g){
+                $this->data['data'][$g['name']] = $this->model->getPlayerStats($g['name']);
+            }
+        }
         return view('game/top',$this->data);
     }
 

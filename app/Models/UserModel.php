@@ -36,28 +36,29 @@ class UserModel extends \CodeIgniter\Model {
         $now = iso_datetime();
         $b->select("*");
         $b->join('account_ban','account_ban.user_username = user.username and account_ban.validity > NOW()','left');
-        $b->where(['username'=>$data['login'],'password'=>$data['pass']]);
+        $b->where(['username'=>$data['login']]);
         $res = $b->get();
         $res = $res->getResult();
         $b->resetQuery();
         obj_dump($res);
-        if(count($res) == 1 ){
+        if(count($res) == 1 && password_verify($data['pass'],$res[0]->password) ){
             //user found
-            if($res[0]->validity == NULL){
-                //And not banned
-                //Update last login field
-                $b->set(['last_succ_login'=>iso_datetime()]);
-                $b->where("username",$data['login']);
-                if(!$b->update()){
-                    //Error setting login status
-                    $out['message'] = 'Error setting login status';
+                if($res[0]->validity == NULL){
+                    //And not banned
+                    //Update last login field
+                    $b->set(['last_succ_login'=>iso_datetime()]);
+                    $b->where("username",$data['login']);
+                    if(!$b->update()){
+                        //Error setting login status
+                        $out['message'] = 'Error setting login status';
+                    }
+                    $out['status'] = true;
+                    $out['message'] = 'OK';
+                    $out['role'] = $res[0]->user_role_name;
+                }else {
+                    $out['message'] = 'Account banned';
                 }
-                $out['status'] = true;
-                $out['message'] = 'OK';
-                $out['role'] = $res[0]->user_role_name;
-            }else {
-                $out['message'] = 'Account banned';
-            }
+
         }else{
             //Nope
             $b->set(['last_err_login'=>iso_datetime()]);
@@ -70,6 +71,24 @@ class UserModel extends \CodeIgniter\Model {
         return $out;
     }
 
+
+    /**
+     * Pobiera statystyki gier dla obecnego użytkownika
+     * @param $gameName
+     * @return array|array[]|object[]
+     */
+    public function getUserStats($user){
+        //select DISTINCT * from player_stats order by score DESC limit 15
+        return $this->db->query("SELECT MAX(score) as score,game_name FROM `player_stats` WHERE user_username='".$user."' group by game_name order by score DESC")->getResult();
+    }
+
+
+    private function _hashPassword($pass):string {
+        //        $h = password_hash("password",PASSWORD_BCRYPT);
+//        echo $h.'  ------   ';
+//        var_dump(password_verify("password",$h));
+        return '';
+    }
 
 
 }

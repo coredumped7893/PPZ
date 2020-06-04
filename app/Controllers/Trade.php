@@ -7,6 +7,14 @@ namespace App\Controllers;
 class Trade extends BaseController {
 
     /**
+     * Trade constructor.
+     */
+    public function __construct() {
+        $this->tradeModel = model('TradeModel');
+    }
+
+
+    /**
      * @api
      *
      */
@@ -19,6 +27,7 @@ class Trade extends BaseController {
      * @internal
      */
     public function store(){
+        $this->data['skins'] = $this->tradeModel->getskinList();
         return view('trade/store',$this->data);
     }
 
@@ -30,7 +39,6 @@ class Trade extends BaseController {
      * @api
      */
     public function stats () {
-
     }
 
     /**
@@ -38,7 +46,6 @@ class Trade extends BaseController {
      * @api
      */
     public function list () {
-
     }
 
 }

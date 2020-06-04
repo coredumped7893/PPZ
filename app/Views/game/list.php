@@ -1,4 +1,4 @@
-<?= view('partials/_header_') ?>
+<?= view('partials/_header_slim_') ?>
 
     <!-- gRY -->
     <section id="highlights" class="wrapper style3">

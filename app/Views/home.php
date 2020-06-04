@@ -1,5 +1,7 @@
 <?= view('partials/_header_') ?>
 
+
+
     <!-- Intro -->
     <section id="intro" class="wrapper style1">
         <div class="title">STREFA GIER</div>
@@ -53,13 +55,34 @@
                     <p>Kupuj skiny i ulepszaj swoj ekwipunek - dzięki nim zagrasz z dopasowanymi iteami wg swoich preferencji.</p>
                 </header>
 
-                <!-- Image -->
+                <!-- Image carousel -->
+
+                <style>
+                    .owl-carousel .owl-item img{
+                        width: auto;
+                        max-height: 200px;
+                    }
+                </style>
 
 
+                <div class="owl-carousel" id="skinsShow">
 
-                <a href="#" class="image featured">
-                    <img src="images/pic01.jpg" alt="" />
-                </a>
+                    <?php
+
+                    foreach ($skins as $s){
+                        echo '
+                        <div>
+                            <a href="#" class="image featured" >
+                                <img src="images/skins/'.$s->path.'" alt="'.$s->name.'" />
+                            </a>
+                        </div>
+                        ';
+                    }
+
+                    ?>
+
+                </div>
+
 
 
                 <!-- <div class="feature-list">
@@ -103,7 +126,7 @@
                     </div>
                 </div> -->
                 <ul class="actions special">
-                    <li><a href="#" class="button style1 large">WIĘCEJ</a></li>
+                    <li><a href="/store" class="button style1 large">WIĘCEJ</a></li>
                 </ul>
             </section>
 
@@ -115,37 +138,93 @@
         <div class="title">RANKINGI</div>
         <div class="container">
             <div class="row aln-center">
-                <div class="col-4 col-12-medium">
-                    <section class="highlight">
-                        <h3><a href="#"><i class="fas fa-crown"></i> LITERAKI TOP5</a></h3>
-                        <p><ul>
-                            <li>gABEN5678_8  <b>7890 pkt </b></li>
-                            <li>Atarix_90  <b>6788 pkt </b></li>
-                            <li>meganoo_r6 <b>5678 pkt </b></li>
-                            <li>ukulele  <b>3455 pkt </b></li>
-                            <li>przemm5  <b>3450 pkt </b></li>
-                        </ul></p>
-                        <ul class="actions">
-                            <li><a href="#" class="button style1">PEŁNY RANKING</a></li>
-                        </ul>
-                    </section>
-                </div>
-                <div class="col-4 col-12-medium">
-                    <section class="highlight">
-                        <h3><a href="#"><i class="fas fa-crown"></i> PONG TOP5</a></h3>
-                        <p><ul>
-                            <li>pawelek_56 <b>9000 pkt </b></li>
-                            <li>r6_t6  <b>5432 pkt </b></li>
-                            <li>wieprz_69  <b>3456 pkt  </b></li>
-                            <li>robertooo_x4  <b>2345 pkt  </b></li>
-                            <li>galaxic_top_9  <b>2340 pkt </b></li>
-                        </ul></p>
-                        <ul class="actions">
-                            <li><a href="#" class="button style1">PEŁNY RANKING</a></li>
-                        </ul>
-                    </section>
-                </div>
+
+
+                <?php
+
+                foreach ($data as $k => $d){
+                    if(empty($d)){
+                        //No data
+                        echo '
+                        <div class="col-4 col-12-medium">
+                            <section class="highlight">
+                                <h3><a href="#"><i class="fas fa-crown"></i> '.strtoupper($k).' TOP5</a></h3>
+                                <p><ul>
+                                    <li><b>No data</b></li>
+                                </ul></p>
+
+                            </section>
+                        </div>
+                        ';
+                    }else{
+                        echo '
+                        <div class="col-4 col-12-medium">
+                            <section class="highlight">
+                                <h3><a href="#"><i class="fas fa-crown"></i> '.strtoupper($k).' TOP5</a></h3>
+                                <p><ul>';
+                                    foreach ($data[$k] as $score){
+                                        echo '<li>'.$score->user_username.': <b>'.$score->score.'</b></li>';
+                                    }
+                                echo '</ul></p>
+
+                            </section>
+                        </div>
+                        ';
+                    }
+                }
+
+                ?>
+
+
+
+
+<!---->
+<!---->
+<!---->
+<!--                <div class="col-4 col-12-medium">-->
+<!--                    <section class="highlight">-->
+<!--                        <h3><a href="#"><i class="fas fa-crown"></i> LITERAKI TOP5</a></h3>-->
+<!--                        <p><ul>-->
+<!--                            <li>gABEN5678_8  <b>7890 pkt </b></li>-->
+<!--                            <li>Atarix_90  <b>6788 pkt </b></li>-->
+<!--                            <li>meganoo_r6 <b>5678 pkt </b></li>-->
+<!--                            <li>ukulele  <b>3455 pkt </b></li>-->
+<!--                            <li>przemm5  <b>3450 pkt </b></li>-->
+<!--                        </ul></p>-->
+<!--                        <ul class="actions">-->
+<!--                            <li><a href="#" class="button style1">PEŁNY RANKING</a></li>-->
+<!--                        </ul>-->
+<!--                    </section>-->
+<!--                </div>-->
+<!--                <div class="col-4 col-12-medium">-->
+<!--                    <section class="highlight">-->
+<!--                        <h3><a href="#"><i class="fas fa-crown"></i> PONG TOP5</a></h3>-->
+<!--                        <p><ul>-->
+<!--                            <li>pawelek_56 <b>9000 pkt </b></li>-->
+<!--                            <li>r6_t6  <b>5432 pkt </b></li>-->
+<!--                            <li>wieprz_69  <b>3456 pkt  </b></li>-->
+<!--                            <li>robertooo_x4  <b>2345 pkt  </b></li>-->
+<!--                            <li>galaxic_top_9  <b>2340 pkt </b></li>-->
+<!--                        </ul></p>-->
+<!--                        <ul class="actions">-->
+<!--                            <li><a href="#" class="button style1">PEŁNY RANKING</a></li>-->
+<!--                        </ul>-->
+<!--                    </section>-->
+<!--                </div>-->
+
+
+
             </div>
+
+
+            <div class="row aln-center" style="margin-top: 50px">
+
+                <p><a href="/games/top" class="button style1">PEŁNY RANKING</a></p>
+
+            </div>
+
+
+
         </div>
     </section>
 
