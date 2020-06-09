@@ -15,6 +15,7 @@ class Filters extends BaseConfig
 		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
         'auth'     => \App\Filters\AuthFilter::class,
+        'csrfget'  => \App\Filters\CSRFGet::class,
 	];
 
 	// Always applied before every request
@@ -43,6 +44,11 @@ class Filters extends BaseConfig
             '/game/*',
             '/trade/*',
             '/user/settings',
+            'store/*',
+        ]],
+        'csrfget' => ['before' => [
+            '/store/createOrder',
+            'store/finishOrder'
         ]],
     ];
 }

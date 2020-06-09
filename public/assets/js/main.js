@@ -79,37 +79,7 @@
 				valForm(e);
 			});
 
-			$('#skinsShow').owlCarousel({
-				loop:true,
-				margin:10,
-				nav:true,
-				autoplaySpeed: 1000,
-				autoplay:true,
-				autoplayTimeout:2000,
-				autoHeight: false,
-				responsive:{
-					0:{
-						items:1
-					},
-					600:{
-						items:3
-					},
-					1000:{
-						items:4
-					}
-				}
-			})
 
-
-
-			$('#skins').owlCarousel({
-				loop:true,
-				margin:10,
-				nav:false,
-				autoplay: false,
-				autoHeight: false,
-
-			})
 
 
 })(jQuery);

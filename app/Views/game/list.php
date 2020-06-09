@@ -10,7 +10,7 @@
 
                     <div class="col-4 col-12-medium">
                         <section class="highlight">
-                            <a href="#" class="image featured"><img src="<?= $g['icon'] ?>" alt="" /></a>
+                            <a href="#" class="image featured"><img style="min-height: 200px" src="<?= $g['icon'] ?>" alt="" /></a>
                             <h3><a href="#"><?= $g['display_name'] ?></a></h3>
                             <p><?= $g['description'] ?></p>
                             <ul class="actions">

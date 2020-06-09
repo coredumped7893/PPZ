@@ -52,7 +52,7 @@ class User extends BaseController{
         $this->data['gravatar'] = $this->get_gravatar(session('username'));
         $this->data['stats'] = $this->userModel->getUserStats(session('username'));
         $this->data['includeCSS'] = ['owl.carousel','owl.theme.default'];
-        $this->data['includeJS'] = ['owl.carousel.min'];
+        $this->data['includeJS'] = ['owl.carousel.min','carouselconfig'];
 
         $tradeModel = model('TradeModel');
         $this->data['skins'] = $tradeModel->getUserSkins();

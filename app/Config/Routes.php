@@ -36,6 +36,8 @@ $routes->get('/', 'Home::index');
 $routes->get('/games','Game::gameList');
 $routes->get('/games/(:any)','Game::$1');
 $routes->get('/store','Trade::store');
+$routes->get('/store/createOrder','Trade::createOrder');
+$routes->get('/store/finishOrder','Trade::finishOrder');
 $routes->get('/contact','Home::contact');
 
 /**
