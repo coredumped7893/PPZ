@@ -20,10 +20,10 @@
                     <div class="col-4 col-12-medium">
                         <section class="highlight">
                             <a href="#" class="image featured"><img src="/images/skins/'.$s->path.'" alt="'.$s->name.'" /></a>
-                            <p>'.$s->description.'</p>
+                            <p>'.$s->name.'</p>
                             <p><a href="#"><b>'.$s->price.' ZŁ</b></a></p>
                             <ul class="actions">
-                                <li><a href="#" class="button style1">Kup</a></li>
+                                <li><a href="/store/createOrder?id='.$s->id.'&t='.$t.'" class="button style1">Kup</a></li>
                             </ul>
                         </section>
                     </div>

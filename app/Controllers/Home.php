@@ -27,12 +27,13 @@ class Home extends BaseController {
         $this->data['games'] = $this->gameModel->where('status','online')->findAll();//Lista aktywnych gier
         if(!empty($this->data['games'])){
             foreach ($this->data['games'] as $g){
-                $this->data['data'][$g['name']] = $this->gameModel->getPlayerStats($g['name']);
+                $this->data['data'][$g['name']] = $this->gameModel->getPlayerStats($g['name'],5);
             }
         }
 
         $this->data['includeCSS'] = ['owl.carousel','owl.theme.default'];
-        $this->data['includeJS'] = ['owl.carousel.min'];
+        $this->data['includeJS'] = ['owl.carousel.min','carouselconfig'];
+
 
         //Pobranie dostępnych do sprzedaży skinów
         $tradeModel = model('TradeModel');

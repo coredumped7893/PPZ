@@ -18,9 +18,9 @@ class GameModel extends \CodeIgniter\Model {
      * @param $gameName
      * @return array|array[]|object[]
      */
-    public function getPlayerStats($gameName){
+    public function getPlayerStats($gameName,$limit=15){
         //select DISTINCT * from player_stats order by score DESC limit 15
-        return $this->db->query("select DISTINCT * from player_stats where game_name='".$gameName."' order by score DESC limit 15")->getResult();
+        return $this->db->query("select DISTINCT * from player_stats where game_name='".$gameName."' order by score DESC limit ".$limit)->getResult();
     }
 
 
