@@ -81,7 +81,7 @@ $cfg = (config('Template'));
                 </li>
 
                 <li>
-                    <a href="#"><i class="fas fa-pen"></i>  FORUM</a>
+                    <a href="http://forum.ppz.local"><i class="fas fa-pen"></i>  FORUM</a>
                 </li>
 
 
