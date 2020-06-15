@@ -163,7 +163,7 @@
                                 <h3><a href="#"><i class="fas fa-crown"></i> '.strtoupper($k).' TOP5</a></h3>
                                 <p><ul>';
                                     foreach ($data[$k] as $score){
-                                        echo '<li>'.$score->user_username.': <b>'.$score->score.'</b></li>';
+                                        echo '<li>'.$score->user_username.': <b>'.$score->highscore.'</b></li>';
                                     }
                                 echo '</ul></p>
 

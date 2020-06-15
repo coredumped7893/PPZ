@@ -428,6 +428,7 @@ HTMLActuator.prototype.message = function (won) {
     var message = won ? "You win!" : "Game over!"
 
     // if (ga) ga("send", "event", "game", "end", type, this.score);
+    _updateStats(this.score);
 
     this.messageContainer.classList.add(type);
     this.messageContainer.getElementsByTagName("p")[0].textContent = message;
@@ -437,6 +438,17 @@ HTMLActuator.prototype.clearMessage = function () {
     this.messageContainer.classList.remove("game-won", "game-over");
 };
 
+
+function _updateStats(score){
+    $.ajax({
+        url: "/game/stats/2048",
+        async:true,
+        data:{data:score},
+        method:"POST",
+    }).done(function(status) {
+        //alert(status);
+    });
+}
 
 
 function KeyboardInputManager() {

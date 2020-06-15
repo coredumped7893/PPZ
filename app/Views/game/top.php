@@ -58,7 +58,7 @@
                             <section class="highlight">
                                 <p>Score(summary)</p>';
                                 foreach ($data[$k] as $score){
-                                    echo '<p>'.$score->score.'</p>';
+                                    echo '<p>'.$score->highscore.'</p>';
                                 }
                                 echo '
                             </section>

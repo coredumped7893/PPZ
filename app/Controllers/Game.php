@@ -73,13 +73,21 @@ class Game extends BaseController {
     /**
      * GET: Get game and user stats
      * (stats are now included in game/data)
+     * POST: insert new score to DB
      *
      * @param $gameID
      * @api
      * @deprecated
      */
     public function stats($gameID) {
-
+        $this->response->setHeader('Content-Type','application/json');
+        $postData = $this->request->getPost();
+        if($this->request->getMethod(true) == "GET"){
+            //Get user highscore
+            echo \json_encode($this->model->getPlayerStats($gameID,$limit=1,$forUser=session('username')));
+        }else if($this->request->getMethod(true) == "POST"){
+            echo $this->model->insertPlayerStats($gameID,$postData['data'],session('username'));
+        }
     }
 
     /**

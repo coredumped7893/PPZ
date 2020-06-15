@@ -130,3 +130,4 @@ nb-configuration.xml
 node_modules
 node_modules/*
 
+Forum/cache/*
