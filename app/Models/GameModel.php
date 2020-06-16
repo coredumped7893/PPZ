@@ -15,6 +15,7 @@ class GameModel extends \CodeIgniter\Model {
 
     /**
      * Ogólne statystyki dot. gier
+     * Możliwość wyboru per gracz
      * @param $gameName
      * @return array|array[]|object[]
      */
@@ -28,7 +29,13 @@ class GameModel extends \CodeIgniter\Model {
 
     }
 
-    public function insertPlayerStats($game,$score,$user){
+    /**
+     * Używane przez gry do zapisywania nowego wyniku gracza
+     * @param $game
+     * @param $score
+     * @param $user
+     */
+    public function insertPlayerStats($game, $score, $user){
         $builder = $this->db->table('player_stats');
         $builder->insert([
             'user_username' => $user,

@@ -56,6 +56,7 @@ class User extends BaseController{
 
         $tradeModel = model('TradeModel');
         $this->data['skins'] = $tradeModel->getUserSkins();
+        $this->data['title'] = session('username');
         return view('dashboard',$this->data);
     }
 
@@ -94,6 +95,7 @@ class User extends BaseController{
      */
     public function login(){
         if($this->data['loginStatus']) return redirect()->to('/user');// If logged in, redirect to profile
+        $this->data['title'] = "Zaloguj";
         return view('login');
     }
 

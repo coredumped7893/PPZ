@@ -39,6 +39,10 @@ $routes->get('/store','Trade::store');
 $routes->get('/store/createOrder','Trade::createOrder');
 $routes->get('/store/finishOrder','Trade::finishOrder');
 $routes->get('/contact','Home::contact');
+$routes->get('/faq','Home::faq');
+$routes->get('/rodo','Home::rodo');
+$routes->get('/ToS','Home::ToS');
+
 
 /**
  * --------------------------------------------------------------------

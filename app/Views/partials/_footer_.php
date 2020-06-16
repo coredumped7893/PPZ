@@ -3,10 +3,9 @@
 
     <div class="container">
         <p><a href="/contact">Kontakt</a></p>
-        <p>Rodo</p>
-        <p>Cookies</p>
-        <p>FAQ</p>
-        <p>Regulamin</p>
+        <p><a href="/rodo">Rodo</a></p>
+        <p><a href="/faq">FAQ</a></p>
+        <p><a href="/regulamin">Regulamin</a></p>
         <div id="copyright">
             <ul>
                 <li>&copy; GOŁĘBNIK</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>

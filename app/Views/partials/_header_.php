@@ -11,7 +11,7 @@ $cfg = (config('Template'));
 
 <html>
 <head>
-    <title><?= $cfg->siteName ?></title>
+    <title><?= $cfg->siteName.' | '.$title ?></title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/assets/css/main.css" />
@@ -56,9 +56,9 @@ $cfg = (config('Template'));
                         <ul>
                             <li><a href="/user">PROFIL</a></li>
                            <!-- <li><a href="/user/inventory">EKWIPUNEK</a> -->
-                            <li><a href="#">ZNAJOMI</a></li>
-                            <li><a href="#">HISTORIA PŁATNOŚCI</a></li>
-                            <li><a href="/user/settings">USTAWIENIA KONTA</a></li>
+                            <li><a href="/user#friends">ZNAJOMI</a></li>
+                            <li><a href="/user#payments">HISTORIA PŁATNOŚCI</a></li>
+                            <!--<li><a href="/user/settings">USTAWIENIA KONTA</a></li>-->
                         </ul>
                     </li>';
                 }

@@ -38,6 +38,7 @@ class Home extends BaseController {
         //Pobranie dostępnych do sprzedaży skinów
         $tradeModel = model('TradeModel');
         $this->data['skins'] = $tradeModel->getskinList();
+        $this->data['title'] = "Strona główna";
 
 		return view('home',$this->data);
 	}
@@ -46,7 +47,38 @@ class Home extends BaseController {
      * Contact us form/data
      */
     public function contact(){
+        $this->data['title'] = "Kontakt";
+
         return view('contact',$this->data);
+    }
+
+
+    /**
+     * Widok FAQ
+     * @return string
+     */
+    public function faq(){
+        $this->data['title'] = "FAQ";
+
+        return view('faq',$this->data);
+    }
+
+    /**
+     * Widok regulaminu
+     */
+    public function ToS(){
+        $this->data['title'] = "Regulamin";
+
+        return view('tos',$this->data);
+    }
+
+    /**
+     * Widok informacji dot. rodo
+     */
+    public function rodo(){
+        $this->data['title'] = "Rodo";
+
+        return view('rodo',$this->data);
     }
 
 

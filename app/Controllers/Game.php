@@ -44,6 +44,8 @@ class Game extends BaseController {
             //Nazwa gry jest wymagana
             return redirect()->to('/');
         }
+        $this->data['title'] = $gameName;
+
         return view('game/play/_'.$gameName.'_',$this->data);
     }
 
@@ -54,6 +56,7 @@ class Game extends BaseController {
     public function gameList(){
         $this->gameModel = model('GameModel');
         $this->data['games'] = $this->gameModel->where('status','online')->findAll();//Lista aktywnych gier
+        $this->data['title'] = "Gry";
         return view('game/list',$this->data);
     }
 
@@ -67,6 +70,7 @@ class Game extends BaseController {
                 $this->data['data'][$g['name']] = $this->model->getPlayerStats($g['name']);
             }
         }
+        $this->data['title'] = "Top gracze";
         return view('game/top',$this->data);
     }
 
