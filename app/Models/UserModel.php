@@ -75,6 +75,70 @@ class UserModel extends \CodeIgniter\Model {
         return $out;
     }
 
+    /**
+     * Pobiera liste znajomych dla obecnego użytkownika
+     */
+    public function getUserFriends(){
+        return $this->db->query("
+            SELECT * FROM friend where `user_inviting`='".session('username')."'
+        ")->getResult();
+    }
+
+    public function getUserInvitations(){
+        return $this->db->query("
+            SELECT * FROM friend where `user_invited`='".session('username')."' AND `accepted`='0'
+        ")->getResult();
+    }
+
+    /**
+     * Wpisuje nowe zaproszenie do znajomych
+     * @param $invited
+     * @return array|array[]|object[]
+     */
+    public function createFriend($invited){
+        $invited = $this->db->escapeString(esc($invited));
+        var_dump($this->checkFriend($invited));
+        if(!$this->checkFriend($invited)){
+             $this->db->query("
+            INSERT INTO friend (`user_inviting`,`user_invited`) VALUES ('".session('username')."','".$invited."')
+        ")->getResult();
+        }else{
+
+            $this->db->query("
+            INSERT INTO friend (`user_inviting`,`user_invited`) VALUES ('".session('username')."','".$invited."')
+            ")->getResult();
+
+            $this->db->query("
+                UPDATE friend SET `accepted`='1' WHERE (`user_inviting`='".session('username')."' AND `user_invited`='".$invited."' ) OR 
+                (`user_inviting`='".$invited."' AND `user_invited`='".session('username')."')
+            ")->getResult();
+        }
+
+    }
+
+    public function deleteFriend($toDelete){
+        $toDelete = esc($toDelete);
+//        $b = $this->db->table("friend");
+//        $b->orWhere(['user_inviting'=>session('username'),'user_invited'=>$toDelete]);
+//        $b->orWhere(['user_inviting'=>$toDelete,'user_invited'=>session('username')]);
+//        $b->delete();
+        $this->db->query("
+            DELETE FROM friend where (`user_inviting`='".session('username')."' AND `user_invited`='".$toDelete."' ) OR (`user_inviting`='".$toDelete."' AND `user_invited`='".session('username')."')
+        ")->getResult();
+    }
+
+    /**
+     * Checks if logged in user are friends with given username
+     * @param $name
+     * @return bool
+     * @see session()
+     */
+    public function checkFriend($name) : bool {
+        return !empty($this->db->query("
+            SELECT * FROM friend where (`user_inviting`='".session('username')."' AND `user_invited`='".$name."' ) OR 
+                (`user_inviting`='".$name."' AND `user_invited`='".session('username')."')
+        ")->getResult());
+    }
 
     /**
      * Pobiera statystyki gier dla obecnego użytkownika
@@ -82,8 +146,9 @@ class UserModel extends \CodeIgniter\Model {
      * @return array|array[]|object[]
      */
     public function getUserStats($user){
+        $user = $this->db->escape(esc(($user)));
         //select DISTINCT * from player_stats order by score DESC limit 15
-        return $this->db->query("SELECT MAX(score) as score,game_name FROM `player_stats` WHERE user_username='".$user."' group by game_name order by score DESC")->getResult();
+        return $this->db->query("SELECT MAX(score) as score,game_name FROM `player_stats` WHERE user_username=".$user." group by game_name order by score DESC")->getResult();
     }
 
 

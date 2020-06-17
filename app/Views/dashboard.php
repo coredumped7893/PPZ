@@ -11,7 +11,7 @@
 
     <div id="user-profile-2" class="user-profile">
         <div class="tabbable">
-            <ul class="nav nav-tabs padding-18">
+            <ul class="nav nav-tabs padding-18" style="width: 28%;margin: auto;">
                 <li class="active">
                     <a data-toggle="tab" href="#home">
                         <i class="green ace-icon fa fa-user bigger-120"></i>
@@ -47,8 +47,8 @@
 
             <div class="tab-content no-border padding-24">
                 <div id="home" class="tab-pane in active">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-3 center">
+                    <div class="row"  style="width: fit-content;margin: auto;">
+                        <div class="col-xs-12 col-sm-4 center">
 							<span class="profile-picture">
 								<img class="editable img-responsive" alt=" Avatar" id="avatar2" src="<?=   $gravatar;   ?>">
 							</span>
@@ -66,7 +66,7 @@
 <!--                            </a>-->
                         </div><!-- /.col -->
 
-                        <div class="col-xs-12 col-sm-9">
+                        <div class="col-xs-12 col-sm-8">
                             <h4 class="blue">
                                 <span class="middle"><?=   session('username');   ?></span>
 
@@ -182,64 +182,134 @@
                 <div id="friends" class="tab-pane">
                     <div class="profile-users clearfix" style="margin: auto;display: flex;align-items: center;justify-content: center;flex-wrap: wrap;">
 
-                        Brak znajomych
-                        <div class="itemdiv memberdiv">
-                            <div class="inline pos-rel">
-                                <div class="user">
-                                    <a href="#">
-                                        <img src="http://bootdey.com/img/Content/avatar/avatar6.png" alt="Bob Doe's avatar">
-                                    </a>
-                                </div>
 
-                                <div class="body">
-                                    <div class="name">
-                                        <a href="#" style="color: firebrick">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                            (Usuń)
-                                        </a>
-                                        <br>
-                                        <a href="#">
-                                            <span class="user-status status-online"></span>
-                                            Bob Doe
-                                        </a>
-                                    </div>
-                                </div>
 
-                                <div class="popover">
-                                    <div class="arrow"></div>
 
-                                    <div class="popover-content">
-                                        <div class="bolder">Content Editor</div>
+                        <?php
 
-                                        <div class="time">
-                                            <i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
-                                            <span class="green"> 20 mins ago </span>
+                            if(empty($friends)){
+                                echo '
+                                    Brak znajomych
+                                ';
+                            }else{
+                                foreach ($friends as $f){
+                                    //if($f->user_inviting == session('username') && $f->accepted == 0) continue;
+
+                                            if($f->accepted == 1) {
+
+                                                echo '
+                                            <div class="itemdiv memberdiv" id="friend_'.$f->user_invited.'">
+                                                <div class="inline pos-rel">
+                                                    <div class="user">
+                                                        <a href="#">
+                                                            <img src="'.$friend_gravatar[$f->user_invited].'" alt="Bob Doe\'s avatar">
+                                                        </a>
+                                                    </div>
+                    
+                                            <div class="body">
+                                            ';
+
+                                                echo '
+                                                <div class="name">
+                                                    <a href="#" class="delete_action" id="' . $f->user_invited . '"  style="color: firebrick;font-size: 10px">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        (Usuń)
+                                                    </a>
+                                                    <br>
+                                                    <a href="/user/view/' . $f->user_invited . '">
+                                                        <span class="user-status status-online"></span>
+                                                        ' . $f->user_invited . '
+                                                    </a>
+                                                </div>
+                                               ';
+                                            }else if($f->user_inviting == session('username') && $f->accepted == 0){
+
+                                                echo '
+                                                <div class="itemdiv memberdiv" id="friend_'.$f->user_invited.'">
+                                                    <div class="inline pos-rel">
+                                                        <div class="user">
+                                                            <a href="#">
+                                                                <img src="'.$friend_gravatar[$f->user_invited].'" alt="Bob Doe\'s avatar">
+                                                            </a>
+                                                        </div>
+                        
+                                                <div class="body">
+                                            ';
+
+                                                echo '
+                                                <div class="name">
+                                                    <a href="#" class="" id="'.$f->user_inviting.'"  style="color: grey;font-size: 10px">
+                                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                                        Wysłano
+                                                    </a> 
+                                                    <br>
+                                                    <a href="/user/view/'.$f->user_inviting.'">
+                                                        <span class="user-status status-online"></span>
+                                                        '.$f->user_inviting.'
+                                                    </a>
+                                                </div>
+                                               ';
+                                            }else{
+
+                                                echo '
+                                                    <div class="itemdiv memberdiv" id="friend_'.$f->user_inviting.'">
+                                                        <div class="inline pos-rel">
+                                                            <div class="user">
+                                                                <a href="#">
+                                                                    <img src="'.$friend_gravatar[$f->user_inviting].'" alt="Bob Doe\'s avatar">
+                                                                </a>
+                                                            </div>
+                            
+                                                    <div class="body">
+                                            ';
+
+                                                echo '
+                                                <div class="name">
+                                                    <a href="#" class="invite_action accept" id="'.$f->user_inviting.'"  style="color: darkgreen;font-size: 15px">
+                                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                                        Akceptuj
+                                                    </a> 
+                                                    <br>
+                                                    <a href="/user/view/'.$f->user_inviting.'">
+                                                        <span class="user-status status-online"></span>
+                                                        '.$f->user_inviting.'
+                                                    </a>
+                                                </div>
+                                               ';
+                                            }
+
+
+
+
+
+
+
+
+                                    echo '        </div>
                                         </div>
-
-                                        <div class="hr dotted hr-8"></div>
-
-                                        <div class="tools action-buttons">
-
-                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                                ';
+                                }
+                            }
+
+
+                        ?>
+
 
 
                     </div>
 
                     <div class="hr hr10 hr-double"></div>
 
-                    <ul class="pager pull-right">
-                        <li class="previous disabled">
-                            <a href="#">← Prev</a>
-                        </li>
-
-                        <li class="next">
-                            <a href="#">Next →</a>
-                        </li>
-                    </ul>
+<!--                    <ul class="pager pull-right">-->
+<!--                        <li class="previous disabled">-->
+<!--                            <a href="#">← Prev</a>-->
+<!--                        </li>-->
+<!---->
+<!--                        <li class="next">-->
+<!--                            <a href="#">Next →</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
                 </div><!-- /#friends -->
 
                 <div id="items" class="tab-pane" style="min-height: 400px;">

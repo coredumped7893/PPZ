@@ -51,13 +51,23 @@ class User extends BaseController{
         //Get gravatar
         $this->data['gravatar'] = $this->get_gravatar(session('username'));
         $this->data['stats'] = $this->userModel->getUserStats(session('username'));
-        $this->data['includeCSS'] = ['owl.carousel','owl.theme.default'];
-        $this->data['includeJS'] = ['owl.carousel.min','carouselconfig','bootstrap.min'];
+        $this->data['includeCSS'] = ['owl.carousel','owl.theme.default','jquery-confirm.min'];
+        $this->data['includeJS'] = ['owl.carousel.min','carouselconfig','bootstrap.min','friends','jquery-confirm.min'];
 
         $tradeModel = model('TradeModel');
         $this->data['skins'] = $tradeModel->getUserSkins();
         $this->data['title'] = session('username');
         $this->data['user'] = $this->userModel->find(session('username'));
+        $this->data['friends'] = $this->userModel->getUserFriends();
+
+        foreach ($this->userModel->getUserInvitations() as $inv){
+            array_push($this->data['friends'],$inv);
+        }
+
+        foreach ($this->data['friends'] as $f){
+            $this->data['friend_gravatar'][$f->user_invited] = $this->get_gravatar($f->user_invited);
+            $this->data['friend_gravatar'][$f->user_inviting] = $this->get_gravatar($f->user_inviting);
+        }
         return view('dashboard',$this->data);
     }
 
@@ -86,17 +96,31 @@ class User extends BaseController{
      * @api
      */
     public function friends(){
-
+        $this->response->setHeader('Content-Type','application/json');
+        $postData = $this->request->getPost();
+        if($this->request->getMethod(true) == "GET" ){
+            echo \json_encode($this->userModel->getUserFriends());
+        }else if($this->request->getMethod(true) == "PUT" ){
+            echo "Created:".($this->request->getRawInput()['username']);
+            $this->userModel->createFriend($this->request->getRawInput()['username']);
+        }else if ($this->request->getMethod(true) == "POST" && isset($postData['delete']) && $postData['delete']=='1' ){
+            $this->userModel->deleteFriend($postData['username']);
+            echo "Deleted:".$postData['username'];
+        }
+        echo 'OK';
     }
 
     /**
      * Shows public user profile
      * @param $name
      */
-    public function view($name){
-        $name = htmlentities($name);
+    public function view($name=''){
+        if($name == '') return view('errors/404',$this->data);
         $this->data['gravatar'] = $this->get_gravatar($name);
-        $this->data['stats'] = $this->userModel->getUserStats(session('username'));
+        $this->data['includeJS'] = ['owl.carousel.min','carouselconfig','bootstrap.min','friends'];
+        $this->data['stats'] = $this->userModel->getUserStats($name);
+        $this->data['user'] = $this->userModel->find($name);
+        $this->data['isFriend'] = $this->userModel->checkFriend($name);
         return view('publicProfile',$this->data);
     }
 

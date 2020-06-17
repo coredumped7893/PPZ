@@ -41,6 +41,7 @@ class Filters extends BaseConfig
 	public $filters = [
 	    'auth' => ['before' => [
 	        '/user',
+            '/user/friends',
             '/game/*',
             '/trade/*',
             '/user/settings',

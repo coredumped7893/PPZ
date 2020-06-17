@@ -133,4 +133,4 @@ node_modules/*
 Forum/cache/
 Forum/cache
 Forum/cache/production
-Forum/cache/production/
+Forum/cache/production/*
