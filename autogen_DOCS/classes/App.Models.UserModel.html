@@ -127,8 +127,52 @@
     </li>
 
                                                                                                                                                                 <li class="method public">
+        <a href="#method_auth" title="auth :: Tries to auth user with given login and password
+all params are escaped">
+            <span class="description">Tries to auth user with given login and password
+all params are escaped</span><pre>auth</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_checkFriend" title="checkFriend :: Checks if logged in user are friends with given username">
+            <span class="description">Checks if logged in user are friends with given username</span><pre>checkFriend</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_createFriend" title="createFriend :: Wpisuje nowe zaproszenie do znajomych">
+            <span class="description">Wpisuje nowe zaproszenie do znajomych</span><pre>createFriend</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_deleteFriend" title="deleteFriend :: ">
+            <span class="description"></span><pre>deleteFriend</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getUserFriends" title="getUserFriends :: Pobiera liste znajomych dla obecnego użytkownika">
+            <span class="description">Pobiera liste znajomych dla obecnego użytkownika</span><pre>getUserFriends</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getUserInvitations" title="getUserInvitations :: Pobiera listę zaproszeń do znajomych">
+            <span class="description">Pobiera listę zaproszeń do znajomych</span><pre>getUserInvitations</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
         <a href="#method_getUserStats" title="getUserStats :: Pobiera statystyki gier dla obecnego użytkownika">
             <span class="description">Pobiera statystyki gier dla obecnego użytkownika</span><pre>getUserStats</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_registerUser" title="registerUser :: ">
+            <span class="description"></span><pre>registerUser</pre>
         </a>
     </li>
 
@@ -136,7 +180,7 @@
         </li>
         <li class="nav-header protected">» Protected
             <ul>
-                                                                                                                                                        </ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                    </ul>
         </li>
         <li class="nav-header private">» Private
             <ul>
@@ -145,7 +189,7 @@
                                 <span class="description"></span><pre>_hashPassword</pre>
                             </a>
                         </li>
-                                                                                    </ul>
+                                                                                                                                                                                                                                                                                                                                                </ul>
         </li>
         <li class="nav-header">
             <i class="icon-custom icon-constant"></i> Constants
@@ -254,6 +298,213 @@
                             </div>
 
                         </div>
+                                            <a id="method_auth"></a>
+                        <div class="element clickable method public  method_auth" data-toggle="collapse" data-target=".method_auth .collapse">
+                            <h2>Tries to auth user with given login and password
+all params are escaped</h2>
+                            <pre>auth( $data) : array</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    see
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                            \CodeIgniter\Database\BaseBuilder::getWhere
+                                                                                                                
+                                                                                                                                                                        
+                                                                                                                                                                            \CodeIgniter\Database\ResultInterface::getResult
+                                                                                                                
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$data</h4>
+                                                <code></code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>array</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_checkFriend"></a>
+                        <div class="element clickable method public  method_checkFriend" data-toggle="collapse" data-target=".method_checkFriend .collapse">
+                            <h2>Checks if logged in user are friends with given username</h2>
+                            <pre>checkFriend( $name) : boolean</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    see
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                            \App\Models\session()
+                                                                                                                
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$name</h4>
+                                                <code></code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>boolean</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_createFriend"></a>
+                        <div class="element clickable method public  method_createFriend" data-toggle="collapse" data-target=".method_createFriend .collapse">
+                            <h2>Wpisuje nowe zaproszenie do znajomych</h2>
+                            <pre>createFriend( $invited) : array|array&lt;mixed,array&gt;|array&lt;mixed,object&gt;</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$invited</h4>
+                                                <code></code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>array|array&lt;mixed,array&gt;|array&lt;mixed,object&gt;</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_deleteFriend"></a>
+                        <div class="element clickable method public  method_deleteFriend" data-toggle="collapse" data-target=".method_deleteFriend .collapse">
+                            <h2>deleteFriend</h2>
+                            <pre>deleteFriend( $toDelete) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$toDelete</h4>
+                                                <code></code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getUserFriends"></a>
+                        <div class="element clickable method public  method_getUserFriends" data-toggle="collapse" data-target=".method_getUserFriends .collapse">
+                            <h2>Pobiera liste znajomych dla obecnego użytkownika</h2>
+                            <pre>getUserFriends() </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getUserInvitations"></a>
+                        <div class="element clickable method public  method_getUserInvitations" data-toggle="collapse" data-target=".method_getUserInvitations .collapse">
+                            <h2>Pobiera listę zaproszeń do znajomych</h2>
+                            <pre>getUserInvitations() : array|array&lt;mixed,array&gt;|array&lt;mixed,object&gt;</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>array|array&lt;mixed,array&gt;|array&lt;mixed,object&gt;</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
                                             <a id="method_getUserStats"></a>
                         <div class="element clickable method public  method_getUserStats" data-toggle="collapse" data-target=".method_getUserStats .collapse">
                             <h2>Pobiera statystyki gier dla obecnego użytkownika</h2>
@@ -277,6 +528,45 @@
                                                                             
                                                                             <h3>Response</h3>
                                         <code>array|array&lt;mixed,array&gt;|array&lt;mixed,object&gt;</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_registerUser"></a>
+                        <div class="element clickable method public  method_registerUser" data-toggle="collapse" data-target=".method_registerUser .collapse">
+                            <h2>registerUser</h2>
+                            <pre>registerUser( $data) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$data</h4>
+                                                <code></code><p></p>
+                                            </div>
+                                                                            
                                                                     </div>
                             </div>
 
@@ -379,7 +669,7 @@
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
             <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Thu, 04 Jun 2020 13:05:33 +0000.<br/>
+            generated on Wed, 17 Jun 2020 21:00:03 +0000.<br/>
     </footer>
     </body>
 </html>

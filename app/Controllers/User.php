@@ -19,7 +19,7 @@ class User extends BaseController{
      * User constructor.
      * Makes UserModel avail in class
      *
-     * @internal
+     *
      * @see UserModel
      */
     public function __construct() {
@@ -43,9 +43,9 @@ class User extends BaseController{
     /**
      * If logged in, shows user dashboard
      *
-     * @internal
+     *
      * @return void
-     * @internal
+     *
      */
     public function index(){
         //Get gravatar
@@ -128,7 +128,7 @@ class User extends BaseController{
 
     /**
      * Display user login form, and catch data after submit
-     * @internal
+     *
      *
      */
     public function login(){
@@ -139,7 +139,7 @@ class User extends BaseController{
 
     /**
      * Register view
-     * @internal
+     *
      */
     public function register(){
         if($this->data['loginStatus']) return redirect()->to('/user');// If logged in, redirect to profile
@@ -149,7 +149,7 @@ class User extends BaseController{
 
     /**
      * Get data from register form and save it to database
-     * @internal
+     *
      */
     public function saveuser(){
         $postData = $this->request->getPost();
@@ -219,7 +219,7 @@ class User extends BaseController{
     }
 
     /**
-     * @internal
+     *
      */
     public static function logOut(){
         $ses = session();

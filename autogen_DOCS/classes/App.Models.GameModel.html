@@ -121,8 +121,16 @@
             <i class="icon-custom icon-method"></i> Methods
             <ul>
                                                                                                     <li class="method public">
-        <a href="#method_getPlayerStats" title="getPlayerStats :: Ogólne statystyki dot. gier">
-            <span class="description">Ogólne statystyki dot. gier</span><pre>getPlayerStats</pre>
+        <a href="#method_getPlayerStats" title="getPlayerStats :: Ogólne statystyki dot. gier
+Możliwość wyboru per gracz">
+            <span class="description">Ogólne statystyki dot. gier
+Możliwość wyboru per gracz</span><pre>getPlayerStats</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_insertPlayerStats" title="insertPlayerStats :: Używane przez gry do zapisywania nowego wyniku gracza">
+            <span class="description">Używane przez gry do zapisywania nowego wyniku gracza</span><pre>insertPlayerStats</pre>
         </a>
     </li>
 
@@ -130,11 +138,11 @@
         </li>
         <li class="nav-header protected">» Protected
             <ul>
-                                                                                </ul>
+                                                                                                                    </ul>
         </li>
         <li class="nav-header private">» Private
             <ul>
-                                                                                </ul>
+                                                                                                                    </ul>
         </li>
         <li class="nav-header">
             <i class="icon-custom icon-constant"></i> Constants
@@ -172,8 +180,9 @@
                     <h3><i class="icon-custom icon-method"></i> Methods</h3>
                                                                 <a id="method_getPlayerStats"></a>
                         <div class="element clickable method public  method_getPlayerStats" data-toggle="collapse" data-target=".method_getPlayerStats .collapse">
-                            <h2>Ogólne statystyki dot. gier</h2>
-                            <pre>getPlayerStats( $gameName) : array|array&lt;mixed,array&gt;|array&lt;mixed,object&gt;</pre>
+                            <h2>Ogólne statystyki dot. gier
+Możliwość wyboru per gracz</h2>
+                            <pre>getPlayerStats( $gameName,  $limit = 15,  $forUser = &#039;&#039;) : array|array&lt;mixed,array&gt;|array&lt;mixed,object&gt;</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
@@ -190,9 +199,57 @@
                                                 <h4>$gameName</h4>
                                                 <code></code><p></p>
                                             </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$limit</h4>
+                                                <code></code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$forUser</h4>
+                                                <code></code><p></p>
+                                            </div>
                                                                             
                                                                             <h3>Response</h3>
                                         <code>array|array&lt;mixed,array&gt;|array&lt;mixed,object&gt;</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_insertPlayerStats"></a>
+                        <div class="element clickable method public  method_insertPlayerStats" data-toggle="collapse" data-target=".method_insertPlayerStats .collapse">
+                            <h2>Używane przez gry do zapisywania nowego wyniku gracza</h2>
+                            <pre>insertPlayerStats( $game,  $score,  $user) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$game</h4>
+                                                <code></code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$score</h4>
+                                                <code></code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$user</h4>
+                                                <code></code><p></p>
+                                            </div>
+                                                                            
                                                                     </div>
                             </div>
 
@@ -320,7 +377,7 @@
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
             <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Thu, 04 Jun 2020 13:05:33 +0000.<br/>
+            generated on Wed, 17 Jun 2020 21:00:03 +0000.<br/>
     </footer>
     </body>
 </html>

@@ -17,7 +17,7 @@ class Game extends BaseController {
 
     /**
      * Game constructor.
-     * @internal
+     *  
      */
     public function __construct() {
         $this->model = model('GameModel');
@@ -28,7 +28,7 @@ class Game extends BaseController {
 
     /**
      * Game list view
-     * @internal
+     *  
      */
     public function index() {
     }
