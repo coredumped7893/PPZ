@@ -52,11 +52,12 @@ class User extends BaseController{
         $this->data['gravatar'] = $this->get_gravatar(session('username'));
         $this->data['stats'] = $this->userModel->getUserStats(session('username'));
         $this->data['includeCSS'] = ['owl.carousel','owl.theme.default'];
-        $this->data['includeJS'] = ['owl.carousel.min','carouselconfig'];
+        $this->data['includeJS'] = ['owl.carousel.min','carouselconfig','bootstrap.min'];
 
         $tradeModel = model('TradeModel');
         $this->data['skins'] = $tradeModel->getUserSkins();
         $this->data['title'] = session('username');
+        $this->data['user'] = $this->userModel->find(session('username'));
         return view('dashboard',$this->data);
     }
 
@@ -85,8 +86,21 @@ class User extends BaseController{
      * @api
      */
     public function friends(){
-        //@TODO get your friends list
+
     }
+
+    /**
+     * Shows public user profile
+     * @param $name
+     */
+    public function view($name){
+        $name = htmlentities($name);
+        $this->data['gravatar'] = $this->get_gravatar($name);
+        $this->data['stats'] = $this->userModel->getUserStats(session('username'));
+        return view('publicProfile',$this->data);
+    }
+
+
 
     /**
      * Display user login form, and catch data after submit
@@ -104,6 +118,8 @@ class User extends BaseController{
      * @internal
      */
     public function register(){
+        if($this->data['loginStatus']) return redirect()->to('/user');// If logged in, redirect to profile
+        $this->data['title'] = "Rejestracja";
         return view('register');
     }
 

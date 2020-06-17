@@ -44,7 +44,7 @@ $cfg = (config('Template'));
         </div>
 
         <!-- Nav -->
-        <nav id="nav">
+        <nav id="nav" >
             <ul>
                 <li class="current"><a href="/"><i class="fas fa-home"></i>   START</a></li>
 
