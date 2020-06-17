@@ -38,6 +38,13 @@ $cfg = (config('Template'));
 
                     <section>
 
+
+                        <div class="row gtr-50" style="padding-bottom: 20px;color: darkgreen;text-align: center;">
+                            <div class="col-12">
+                                <?= session('register_msg_ok');  ?>
+                            </div>
+                        </div>
+
                         <form method="post" action="/user/auth">
 
                             <div class="row gtr-50">

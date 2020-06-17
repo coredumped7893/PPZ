@@ -152,7 +152,27 @@ class User extends BaseController{
      * @internal
      */
     public function saveuser(){
+        $postData = $this->request->getPost();
+        $this->session->set("register_msg","");
+        $this->session->markAsFlashdata("register_msg");
+        $this->session->set("register_msg_ok","");
+        $this->session->markAsFlashdata("register_msg_ok");
+        if($postData['pass'] != $postData['pass2']){
+            $this->session->set("register_msg","Hasła nie są zgodne");
+            return redirect()->to('/user/register');
+        }
+        if(empty(trim($postData['pass'])) || empty(trim($postData['pass2'])) || empty(trim($postData['username']))){
+            $this->session->set("register_msg","Wszystkie pola muszą być wypełnione");
+            return redirect()->to('/user/register');
+        }
+        if(!empty($this->userModel->find(['username'=>$postData['username']]))){
+            $this->session->set("register_msg","Taki login jest już zajęty");
+            return redirect()->to('/user/register');
+        }
 
+        $this->session->set("register_msg_ok","Zaloguj się na nowe konto");
+        $this->userModel->registerUser($postData);
+        return redirect()->to('/user/login');
     }
 
     /**

@@ -42,14 +42,15 @@ $cfg = (config('Template'));
                             <div class="row gtr-50">
                                 <div class="col-12"> Nazwa użytkownika
                                     <input type="text" name="username" id="register-username" placeholder="Nazwa użytkownika" required/>
+                                    <span id="avail" style="color: darkgreen;display: none">login1234 jest dostepny</span>
                                 </div>
                             </div>
-
-                            <div class="row gtr-50">
-                                <div class="col-12"> Email
-                                    <input type="email" name="email" id="register-email" placeholder="Email" required />
-                                </div>
-                            </div>
+<!---->
+<!--                            <div class="row gtr-50">-->
+<!--                                <div class="col-12"> Email-->
+<!--                                    <input type="email" name="email" id="register-email" placeholder="Email" required />-->
+<!--                                </div>-->
+<!--                            </div>-->
 
                             <div class="row gtr-50">
                                 <div class="col-12"> Hasło
@@ -61,7 +62,7 @@ $cfg = (config('Template'));
                                 <div class="col-12"> Powtórz hasło
                                     <input type="password" name="pass2" id="register-pass2" placeholder="Powtórz hasło" required/>
                                 </div>
-                                <p style="color: #DC143C; display:none">Hasła nie są zgodne.</p>
+                                <p style="color: #DC143C;"><?=  session('register_msg');  ?></p>
                             </div>
 
 

@@ -84,10 +84,31 @@ class UserModel extends \CodeIgniter\Model {
         ")->getResult();
     }
 
+    /**
+     * Pobiera listę zaproszeń do znajomych
+     * @return array|array[]|object[]
+     */
     public function getUserInvitations(){
         return $this->db->query("
             SELECT * FROM friend where `user_invited`='".session('username')."' AND `accepted`='0'
         ")->getResult();
+    }
+
+    public function registerUser($data){
+        $b = $this->db->table("user");
+        $b->insert([
+            'username' => $data['username'],
+            'email' => $data['username']."@wit.edu.pl",
+            'password' => password_hash($data['pass'],PASSWORD_BCRYPT),
+        ]);
+        $b->resetQuery();
+        $b = $this->db->table("user_config_");
+        $b->insert([
+            'user_username' => $data['username'],
+        ]);
+
+
+
     }
 
     /**
