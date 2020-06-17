@@ -17,7 +17,7 @@
 
                     <!-- Contact Form -->
                     <section>
-                        <form method="post" action="#">
+                        <form method="post" action="/contact">
                             <div class="row gtr-50">
                                 <div class="col-6 col-12-small">
                                     <input type="text" name="name" id="contact-name" placeholder="Email" />

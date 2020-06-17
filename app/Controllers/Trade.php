@@ -50,6 +50,7 @@ class Trade extends BaseController {
         $this->data['skins'] = $this->tradeModel->getskinList();
         $this->data['t'] = hash('sha256',rand(0,256).time());
         $this->session->set('t',$this->data['t']);
+        $this->data['title'] = "Sklep";
 
         return view('trade/store',$this->data);
     }
@@ -91,6 +92,7 @@ class Trade extends BaseController {
         $this->data['item']['price'] = $item['price'];
         $this->session->set('orderId',$this->data['payment']->orderId);
         //$this->session->markAsFlashdata('orderId');
+        $this->data['title'] = "POdsumowanie zamówienia";
 
         return view('trade/invoice',$this->data);
     }

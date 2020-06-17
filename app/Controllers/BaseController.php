@@ -48,6 +48,7 @@ class BaseController extends Controller
         $this->session->set(["v1"=>"v1"]);
         $this->templateConfig = config('Template');
         $this->data['loginStatus'] = User::isLoggedIn(false);
+        $this->data['title'] = '';
 
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.

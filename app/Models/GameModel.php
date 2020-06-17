@@ -15,12 +15,34 @@ class GameModel extends \CodeIgniter\Model {
 
     /**
      * Ogólne statystyki dot. gier
+     * Możliwość wyboru per gracz
      * @param $gameName
      * @return array|array[]|object[]
      */
-    public function getPlayerStats($gameName,$limit=15){
+    public function getPlayerStats($gameName,$limit=15,$forUser=''){
         //select DISTINCT * from player_stats order by score DESC limit 15
-        return $this->db->query("select DISTINCT * from player_stats where game_name='".$gameName."' order by score DESC limit ".$limit)->getResult();
+        if($forUser != '' ){
+            $forUser = "AND user_username='".$forUser."'";
+        }
+        return $this->db->query("select *,MAX(score) as highscore from player_stats where game_name='".$gameName."' ".$forUser."
+        GROUP by `user_username` order by highscore DESC limit ".$limit)->getResult();
+
+    }
+
+    /**
+     * Używane przez gry do zapisywania nowego wyniku gracza
+     * @param $game
+     * @param $score
+     * @param $user
+     */
+    public function insertPlayerStats($game, $score, $user){
+        $builder = $this->db->table('player_stats');
+        $builder->insert([
+            'user_username' => $user,
+            'game_name'     => $game,
+            'score'         => $score,
+        ]);
+        echo "DONE";
     }
 
 

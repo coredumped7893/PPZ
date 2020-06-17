@@ -25,7 +25,7 @@ class Filters extends BaseConfig
 			// 'csrf',
 		],
 		'after'  => [
-			'toolbar' => ['except' => 'game/data/*'],
+			'toolbar' => ['except' => ['game/data/*','game/stats/*']],
 			//'honeypot'
 		],
 	];
@@ -41,6 +41,7 @@ class Filters extends BaseConfig
 	public $filters = [
 	    'auth' => ['before' => [
 	        '/user',
+            '/user/friends',
             '/game/*',
             '/trade/*',
             '/user/settings',

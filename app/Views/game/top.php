@@ -48,7 +48,7 @@
                             <section class="highlight">
                             <p>Username</p>';
                             foreach ($data[$k] as $score){
-                                echo '<p>'.$score->user_username.'</p>';
+                                echo '<p><a href="/user/view/'.$score->user_username.'">'.$score->user_username.'</a></p>';
                             }
 
                             echo '</section>
@@ -58,7 +58,7 @@
                             <section class="highlight">
                                 <p>Score(summary)</p>';
                                 foreach ($data[$k] as $score){
-                                    echo '<p>'.$score->score.'</p>';
+                                    echo '<p>'.$score->highscore.'</p>';
                                 }
                                 echo '
                             </section>

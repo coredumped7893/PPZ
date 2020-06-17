@@ -11,7 +11,7 @@ $cfg = (config('Template'));
 
 <html>
 <head>
-    <title><?= $cfg->siteName ?></title>
+    <title><?= $cfg->siteName.' | '.$title ?></title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/assets/css/main.css" />
@@ -44,7 +44,7 @@ $cfg = (config('Template'));
         </div>
 
         <!-- Nav -->
-        <nav id="nav">
+        <nav id="nav" style="font-size: large;">
             <ul>
                 <li class="current"><a href="/"><i class="fas fa-home"></i>   START</a></li>
 
@@ -56,9 +56,9 @@ $cfg = (config('Template'));
                         <ul>
                             <li><a href="/user">PROFIL</a></li>
                              <!-- <li><a href="/user/inventory">EKWIPUNEK</a> -->
-                            <li><a href="#">ZNAJOMI</a></li>
-                            <li><a href="#">HISTORIA PŁATNOŚCI</a></li>
-                            <li><a href="/user/settings">USTAWIENIA KONTA</a></li>
+                            <li><a href="/user#friends">ZNAJOMI</a></li>
+                            <li><a href="/user#payments">HISTORIA PŁATNOŚCI</a></li>
+                            <!--<li><a href="/user/settings">USTAWIENIA KONTA</a></li>-->
                         </ul>
                     </li>';
                 }
@@ -81,18 +81,18 @@ $cfg = (config('Template'));
                 </li>
 
                 <li>
-                    <a href="#"><i class="fas fa-pen"></i>  FORUM</a>
+                    <a href="http://forum.ppz.local"><i class="fas fa-pen"></i>  FORUM</a>
                 </li>
 
 
-<!--                <li>-->
-<!--                    <a href="#"><i class="far fa-address-card"></i>  O NAS</a>-->
-<!--                    <ul>-->
-<!--                        <li><a href="/contact">KONTAKT</a></li>-->
-<!--                        <li><a href="/faq">FAQ</a>-->
-<!--                    </ul>-->
-<!---->
-<!--                </li>-->
+                <li>
+                    <a href="#"><i class="far fa-address-card"></i>  O NAS</a>
+                    <ul>
+                        <li><a href="/contact">KONTAKT</a></li>
+                        <li><a href="/faq">FAQ</a>
+                    </ul>
+
+                </li>
                 <?php
 
                 if($loginStatus){
