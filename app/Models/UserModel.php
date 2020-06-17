@@ -31,7 +31,7 @@ class UserModel extends \CodeIgniter\Model {
      * @see \CodeIgniter\Database\BaseBuilder::getWhere
      * @see \CodeIgniter\Database\ResultInterface::getResult
      * @return array
-     * @internal
+     *  
      */
     public function auth($data): array {
         $out = array('status'=>false,'message'=>'','role'=>'');

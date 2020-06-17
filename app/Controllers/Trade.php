@@ -44,7 +44,7 @@ class Trade extends BaseController {
 
     /**
      * Sklep ze skinami
-     * @internal
+     *  
      */
     public function store(){
         $this->data['skins'] = $this->tradeModel->getskinList();
@@ -59,7 +59,7 @@ class Trade extends BaseController {
 
     /**
      * Widok podsumowania zamówienia
-     * @internal
+     *  
      */
     public function createOrder(){
 
@@ -99,7 +99,7 @@ class Trade extends BaseController {
 
     /**
      * Podsumowanie płatności, wyświetlenie wstępnego statusu
-     * @internal
+     *  
      */
     public function finishOrder(){
 //        obj_dump($_POST);
@@ -143,7 +143,7 @@ class Trade extends BaseController {
     /**
      * Odbieranie powiadomień od PayU z nowym statusem płatności
      * dla testowych płatności nie działa
-     * @internal
+     *  
      * @deprecated
      */
     public function order(){
