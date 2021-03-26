@@ -28,6 +28,6 @@
     "node.js": "0.0.1-security",
     "nodemon": "^2.0.4",
     "path": "^0.12.7",
-    "socket.io": "^1.7.4"
+    "socket.io": "^2.4.0"
   }
 }
